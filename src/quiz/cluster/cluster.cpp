@@ -79,7 +79,7 @@ void clusterHelper(int indice, const std::vector<std::vector<float>> &points, st
 
   processed[indice] = true;
   cluster.push_back(indice);
-  std::vector<int> nearest = tree->search(points[indice], distanceTol);
+  std::vector<int> nearest = tree->search3D(points[indice], distanceTol);
   for (int id:nearest) {
     if (!processed[id]) {
         clusterHelper(id, points, cluster, processed, tree, distanceTol);
@@ -134,11 +134,11 @@ int main ()
   	int it = 0;
   	render2DTree(tree->root,viewer,window, it);
 
-  	std::cout << '\n' << "Test Search" << std::endl;
-  	std::vector<int> nearby = tree->search({-6,7},3.0);
-  	for(int index : nearby)
-      std::cout << index << ",";
-  	std::cout << std::endl;
+  	// std::cout << '\n' << "Test Search" << std::endl;
+  	// std::vector<int> nearby = tree->search({-6,7},3.0);
+  	// for(int index : nearby)
+    //   std::cout << index << ",";
+  	// std::cout << std::endl;
 
   	// Time segmentation process
   	auto startTime = std::chrono::steady_clock::now();
@@ -147,17 +147,17 @@ int main ()
 
   	auto endTime = std::chrono::steady_clock::now();
   	auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-  	std::cout << "clustering found " << clusters.size() << " and took " << elapsedTime.count() << " milliseconds" << std::endl;
+  	std::cout <<'\n' << "clustering found " << clusters.size() << " and took " << elapsedTime.count() << " milliseconds" << std::endl;
 
 
   	// Render clusters
   	int clusterId = 0;
-	std::vector<Color> colors = {Color(1,0,0), Color(0,1,0), Color(0,0,1)};
+		std::vector<Color> colors = {Color(1,0,0), Color(0,1,0), Color(0,0,1)};
   	for(std::vector<int> cluster : clusters)
   	{
   		pcl::PointCloud<pcl::PointXYZ>::Ptr clusterCloud(new pcl::PointCloud<pcl::PointXYZ>());
   		for(int indice: cluster)
-  			clusterCloud->points.push_back(pcl::PointXYZ(points[indice][0],points[indice][1],0));
+  			clusterCloud->points.push_back(pcl::PointXYZ(points[indice][0],points[indice][1],points[indice][2]));
   		renderPointCloud(viewer, clusterCloud,"cluster"+std::to_string(clusterId),colors[clusterId%3]);
   		++clusterId;
   	}

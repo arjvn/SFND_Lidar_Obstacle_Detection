@@ -101,7 +101,7 @@ struct KdTree
 				}
 			}
 			std::cout << "picking a path" << '\n';
-			if ((target[depth % 2] - distanceTol) < root->point[depth % 2])
+			if ((target[depth % 3] - distanceTol) < root->point[depth % 3])
 			{
 				std::cout << "going left: " << root->id << " => ";
 				if ((root->left)==NULL){
@@ -113,7 +113,7 @@ struct KdTree
 				search_helper3D(target, root->left, depth + 1, distanceTol, ids);
 			}
 
-			if ((target[depth % 2] + distanceTol) > root->point[depth % 2])
+			if ((target[depth % 3] + distanceTol) > root->point[depth % 3])
 			{
 				std::cout << "going right: " << root->id << " => ";
 				if ((root->right)==NULL){
