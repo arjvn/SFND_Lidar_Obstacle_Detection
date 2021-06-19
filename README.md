@@ -1,4 +1,4 @@
-# Sensor Fusion Self-Driving Car Course
+# Sensor Fusion Sensor Fusion Nanodegree
 This is the first project in the Udacity Sensor Fusion Nanodegree. It consists of solving the following problem:
 
 - Pointcloud processing with the help of PLC functions
