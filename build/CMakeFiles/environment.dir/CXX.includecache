@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/Users/arjun/Documents/GitHub/SFND_Lidar_Obstacle_Detection/src/3Dkdtree.h
+cstdlib
+-
+
 /Users/arjun/Documents/GitHub/SFND_Lidar_Obstacle_Detection/src/environment.cpp
 sensors/lidar.h
 /Users/arjun/Documents/GitHub/SFND_Lidar_Obstacle_Detection/src/sensors/lidar.h
@@ -15,6 +19,8 @@ processPointClouds.h
 /Users/arjun/Documents/GitHub/SFND_Lidar_Obstacle_Detection/src/processPointClouds.h
 processPointClouds.cpp
 /Users/arjun/Documents/GitHub/SFND_Lidar_Obstacle_Detection/src/processPointClouds.cpp
+3Dkdtree.h
+/Users/arjun/Documents/GitHub/SFND_Lidar_Obstacle_Detection/src/3Dkdtree.h
 
 /Users/arjun/Documents/GitHub/SFND_Lidar_Obstacle_Detection/src/processPointClouds.cpp
 unordered_set
@@ -63,6 +69,8 @@ chrono
 -
 render/box.h
 /Users/arjun/Documents/GitHub/SFND_Lidar_Obstacle_Detection/src/render/box.h
+3Dkdtree.h
+/Users/arjun/Documents/GitHub/SFND_Lidar_Obstacle_Detection/src/3Dkdtree.h
 
 /Users/arjun/Documents/GitHub/SFND_Lidar_Obstacle_Detection/src/render/box.h
 Eigen/Geometry
