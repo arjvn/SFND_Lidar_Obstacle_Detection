@@ -5,9 +5,11 @@ This is the first project in the Udacity Sensor Fusion Nanodegree. It consists o
 - Understanding and deploying an implementation of RANSAC for ground segmentation
 - Understanding and deploying the KD tree structure for the purpose of Euclidean distance clustering for the identification of key elements on the road
 
-## Visulisation of final project results
-<img src="media/ObstacleDetectionFPS.gif" width="700" height="400" />
+## Visualisation of final project results
 <img src="media/LiDAR_PLC.gif" width="700" height="400" />
+<img src="media/LiDAR_PLC2.gif" width="700" height="400" />
+
+
 ## Local Installation
 
 ### Ubuntu
