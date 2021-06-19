@@ -42,39 +42,40 @@ void cityBlock(pcl::visualization::PCLVisualizer::Ptr &viewer, ProcessPointCloud
   // ----------------------------------------------------
 
 // RENDERING PARAMETERS
-  bool renderScene = false;
   bool render_PointCloud = false;
   bool render_inputPointCloud = false;
-  bool render_obst = true;
+  bool render_obst = false;
   bool render_plane = true;
-  bool render_cluster = false;
+  bool render_cluster = true;
   bool render_box = true;
 
+// FilterCloud PARAMETERS
   float filterRes = 0.3;
-  Eigen::Vector4f minPoint(-20, -10, -2, 1);
-  Eigen::Vector4f maxPoint(50, 10, 5, 1);
+  Eigen::Vector4f minPoint(-20, -6, -2, 1);
+  Eigen::Vector4f maxPoint(40, 7, 2, 1);
 
 // RANSAC PARAMETERS
   int MaxIterations = 50;
   float DistanceTol = 0.3;
 
 // CLUSTERING PARAMETERS
-  float ClusterTol = 0.8;
-  int minSize = 50;
-  int maxSize = 400;
+  float ClusterTol = 0.45;
+  int minSize = 5;
+  int maxSize = 300;
 
   // ProcessPointClouds<pcl::PointXYZI>* pointProcessorI = new ProcessPointClouds<pcl::PointXYZI>();
   // pcl::PointCloud<pcl::PointXYZI>::Ptr rawCloud = pointProcessorI->loadPcd("../src/sensors/data/pcd/data_1/0000000000.pcd");
 
+  // STEP 1: Filter Cloud
   pcl::PointCloud<pcl::PointXYZI>::Ptr inputCloud = pointProcessorI->FilterCloud(rawCloud, filterRes, minPoint, maxPoint);
   if (render_PointCloud) {
-      renderPointCloud(viewer, rawCloud, "rawCloud");
+      renderPointCloud(viewer, rawCloud, "rawCloud", Color(1, 1, 1));
   }
   if (render_inputPointCloud) {
       renderPointCloud(viewer, inputCloud, "inputCloud");
   }
 
-  // TODO:: Create point processor
+  // STEP 2: Apply RANSAC
   std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr, pcl::PointCloud<pcl::PointXYZI>::Ptr> segmentCloud = pointProcessorI->PlaneRansac(inputCloud, MaxIterations, DistanceTol);
 
   if (render_obst) {
@@ -84,6 +85,7 @@ void cityBlock(pcl::visualization::PCLVisualizer::Ptr &viewer, ProcessPointCloud
       renderPointCloud(viewer, segmentCloud.second, "planeCloud", Color(1, 0, 0));
   }
 
+  // STEP 3: Clustering
   // std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters = pointProcessorI->Clustering(segmentCloud.first, ClusterTol, minSize, maxSize);
   std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters = pointProcessorI->EclideanClustering(segmentCloud.first, ClusterTol, minSize, maxSize);
 
